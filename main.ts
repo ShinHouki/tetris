@@ -15,8 +15,25 @@ function checkline() {
             } else if (i == 4 && board[i][j] == 1) {
                 for (let k = 0; k < 5; k++) {
                     led.unplot(k, j)
-                    board[k][j] == 0
+                    board[k][j] = 0
                     pause(200)
+                }
+                for (let l = 0; l < 5; l++) {
+                    for (let m = j; m > 0; m += -1) {
+                        if (m == 0) {
+                            board[l][m] = 0
+                            led.unplot(l, m)
+                        } else {
+                            board[l][m] = board[l][m - 1]
+                            if (board[l][m] == 1) {
+                                led.plot(l, m)
+                            } else {
+                                led.unplot(l, m)
+                            }
+                            
+                        }
+                        
+                    }
                 }
             }
             

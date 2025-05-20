@@ -20,12 +20,23 @@ def checkline():
         for i in range(len(board)):
             if(board[i][j] == 0):
                 break
-            else: 
+            else:
                 if(i == 4 and board[i][j] == 1):
                     for k in range(5):
                         led.unplot(k, j)
-                        board[k][j] == 0
+                        board[k][j] = 0
                         pause(200)
+                    for l in range(5):
+                        for m in range(j , 0 , -1):
+                            if(m == 0):
+                                board[l][m] = 0
+                                led.unplot(l, m)
+                            else:
+                                board[l][m] = board[l][m - 1]
+                                if(board[l][m] == 1):
+                                    led.plot(l, m)
+                                else:
+                                    led.unplot(l, m)
 
 
 
@@ -47,7 +58,7 @@ def on_forever():
     for j in range(len(randp)):
         for l in range(len(randp[j])):
             if(randp[j][l] == 1 and (y + l == 4 or board[x + j][y + l + 1] == 1)):
-                if(y < 1): 
+                if(y < 1):
                     gameover = True
                 for i in range(len(randp)):
                     for k in range(len(randp[i])):
